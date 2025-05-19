@@ -1,0 +1,24 @@
+# 忽略输出文件
+output/
+*.pptx
+
+slides/
+styles/
+
+
+__pycache__/
+*.py[cod]
+*.pyo
+
+
+venv/
+.env/
+env/
+
+
+.vscode/
+.idea/
+
+*.log
+*.bak
+*.tmp

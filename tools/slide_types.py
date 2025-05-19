@@ -1,0 +1,65 @@
+from pptx.enum.text import PP_ALIGN
+from pptx.util import Inches
+from tools.font_utils import set_font
+from tools.insert_placeholder import extract_illustration_keyword, insert_placeholder_box
+
+
+def add_title_slide(prs, slide_data, style):
+    slide = prs.slides.add_slide(prs.slide_layouts[0])
+    slide.shapes.title.text = slide_data["title"]
+    subtitle = slide.placeholders[1]
+    subtitle.text = slide_data.get("subtitle", "")
+    set_font(slide.shapes.title.text_frame.paragraphs[0], style, path="title.title_text")
+    set_font(subtitle.text_frame.paragraphs[0], style, path="title.subtitle_text")
+    return slide
+
+
+def add_section_slide(prs, slide_data, style):
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    slide_width = prs.slide_width
+    slide_height = prs.slide_height
+    box_width = Inches(10)
+    box_height = Inches(1.5)
+    left = int((slide_width - box_width) / 2)
+    top = int((slide_height - box_height) / 2)
+
+    textbox = slide.shapes.add_textbox(left, top, box_width, box_height)
+    tf = textbox.text_frame
+    tf.clear()
+    p = tf.paragraphs[0]
+    p.text = slide_data["title"]
+    set_font(p, style, path="section.title_text")
+    p.alignment = PP_ALIGN.CENTER
+    return slide
+
+
+def add_content_slide(prs, slide_data, style):
+    slide = prs.slides.add_slide(prs.slide_layouts[1])
+    slide.shapes.title.text = slide_data["title"]
+    set_font(slide.shapes.title.text_frame.paragraphs[0], style, path="content.title_text")
+
+    tf = slide.placeholders[1].text_frame
+    tf.clear()
+
+    for bullet in slide_data["bullets"]:
+        p = tf.add_paragraph()
+        p.text = bullet
+        set_font(p, style, path="content.bullet_text")
+
+        keyword = extract_illustration_keyword(bullet)
+        if keyword:
+            insert_placeholder_box(slide, keyword)
+
+    return slide
+
+
+def add_closing_slide(prs, slide_data, style):
+    slide = prs.slides.add_slide(prs.slide_layouts[1])
+    slide.shapes.title.text = slide_data["title"]
+    tf = slide.placeholders[1].text_frame
+    tf.clear()
+    p = tf.paragraphs[0]
+    p.text = slide_data.get("subtitle", "")
+    set_font(slide.shapes.title.text_frame.paragraphs[0], style, path="closing.title_text", alignment="center")
+    set_font(p, style, path="closing.subtitle_text")
+    return slide

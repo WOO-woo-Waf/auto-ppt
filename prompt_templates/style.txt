@@ -1,0 +1,40 @@
+我需要为一个 PowerPoint 生成器创建一个精细化的样式模板。请输出一个 JSON 格式的样式配置对象，包含以下结构：
+
+页面类型字段（必须包含）：
+"title"：标题页
+
+"section"：章节页
+
+"content"：内容页
+
+"closing"：结束页
+
+每种页面类型内部，必须进一步细化为以下子对象：
+"title_text"：主要标题文本的样式
+
+"subtitle_text"：副标题文本的样式（仅在 title 和 closing 中使用）
+
+"bullet_text"：段落 bullet 样式（仅用于 content）
+
+每个样式对象必须包含以下字段：
+
+"font_name"：字体名称，如 "Arial", "微软雅黑" 等
+
+"font_size"：字号（整数），如 36、48、60 等
+
+"bold"：是否加粗（true / false）
+
+"font_color"：十六进制颜色代码，如 "#333333"、"#FFFFFF"
+
+可选字段（视情况）："max_char"（最大字符数，超出时自动缩小字号）、"min_font_size"
+
+背景设置字段（background）：
+"background" 是一个对象，键为页面类型（如 title、content 等），每个键对应一个对象：
+
+"type"：支持 "solid"（纯色）、"image"（图片）、"mixed"（颜色 + 图片）
+
+"color"：用于纯色或混合背景的主色（如 "#FFFFFF"）
+
+"image"：图片路径（如 "assets/backgrounds/soft_gradient.png"）
+
+仅返回格式正确、可直接解析的 JSON，不要包含任何解释性文字或 Markdown 格式。
