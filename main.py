@@ -18,8 +18,9 @@ def load_json(path):
         return json.load(f)
 
 
+
 def main():
-    parser = argparse.ArgumentParser(description="Generate PPT from templates")
+  parser = argparse.ArgumentParser(description="Generate PPT from templates")
     parser.add_argument("--template", default="slides/夜游宫.json", help="slide template JSON")
     parser.add_argument("--style", default="styles/style1.json", help="style JSON")
     parser.add_argument("--output_dir", default="output", help="directory for generated ppt")

@@ -4,12 +4,16 @@ from pptx.dml.color import RGBColor
 from tools.font_utils import set_font
 from tools.insert_placeholder import insert_placeholder_box
 from tools.insert_image_file import find_matching_image, insert_image
+
 from tools.tag_utils import (
     parse_tags,
     get_illustration_keyword,
     get_color_from_tags,
     is_emphasis,
 )
+
+from tools.tag_utils import extract_illustration_keyword
+
 
 
 def add_title_slide(prs, slide_data, style):
@@ -18,7 +22,7 @@ def add_title_slide(prs, slide_data, style):
     subtitle = slide.placeholders[1]
     subtitle.text = slide_data.get("subtitle", "")
     set_font(slide.shapes.title.text_frame.paragraphs[0], style, path="title.title_text")
-    set_font(subtitle.text_frame.paragraphs[0], style, path="title.subtitle_text")
+    set_font(subtitle.text_frame.paragraphs[0], style, path="title.subtitle_text", is_title=True)
     return slide
 
 

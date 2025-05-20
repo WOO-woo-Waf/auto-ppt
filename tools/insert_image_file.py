@@ -2,6 +2,9 @@ import os
 from difflib import get_close_matches
 from pptx.util import Inches
 
+from tools.tag_utils import extract_illustration_keyword
+
+
 
 def find_matching_image(keyword, folder="images"):
     if not keyword or not os.path.exists(folder):

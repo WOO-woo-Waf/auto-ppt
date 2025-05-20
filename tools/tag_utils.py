@@ -1,4 +1,5 @@
 import re
+
 from typing import List, Optional, Tuple
 
 
@@ -58,4 +59,11 @@ def is_emphasis(tags: List[str]) -> bool:
 def extract_illustration_keyword(text: str) -> Optional[str]:
     remaining, tags = parse_tags(text)
     return get_illustration_keyword(tags, remaining)
+
+
+
+def extract_illustration_keyword(text: str) -> str | None:
+    """Extract the keyword after the illustration tag."""
+    match = re.search(r"【插图】(.*)", text)
+    return match.group(1).strip() if match else None
 

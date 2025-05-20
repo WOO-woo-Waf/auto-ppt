@@ -1,0 +1,31 @@
+我上传了一份 PowerPoint 幻灯片，请你根据其视觉样式、排版特征，提取出以下风格信息，并将其输出为标准 JSON 格式，结构如下：
+
+样式结构要求：
+顶层字段为 style，包含四种页面类型：
+
+"title"：封面页，包含 title_text 和 subtitle_text 两种文字样式；
+
+"section"：章节页，包含 title_text；
+
+"content"：正文页，包含 title_text 和 bullet_text；
+
+"closing"：结束页，包含 title_text 和 subtitle_text；
+
+每个文字样式对象必须包含字段：
+
+"font_name"：字体名称（如 "微软雅黑"、"Arial" 等）
+
+"font_size"：字号（整数）
+
+"bold"：是否加粗（true / false）
+
+"font_color"：十六进制颜色代码（如 "#333333"）
+
+背景结构：
+顶层字段 "background" 中包含每种页面类型（title, section, content, closing），每个背景对象包含：
+
+"type"：背景类型，可为 "solid"、"image" 或 "mixed"
+
+"color"：纯色背景的颜色代码（如 "#FFFFFF"）
+
+要求仅输出格式化 JSON，结构完整、可以直接用于样式模板文件，无需添加文字解释或 Markdown。

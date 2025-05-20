@@ -1,6 +1,9 @@
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 
+from tools.tag_utils import extract_illustration_keyword
+
+
 
 def insert_placeholder_box(slide, keyword):
     if not keyword:
