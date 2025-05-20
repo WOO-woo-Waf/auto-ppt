@@ -1,7 +1,9 @@
 from pptx.enum.text import PP_ALIGN
 from pptx.util import Inches
 from tools.font_utils import set_font
-from tools.insert_placeholder import extract_illustration_keyword, insert_placeholder_box
+from tools.insert_placeholder import insert_placeholder_box
+from tools.insert_image_file import find_matching_image, insert_image
+from tools.tag_utils import extract_illustration_keyword
 
 
 def add_title_slide(prs, slide_data, style):
@@ -33,7 +35,7 @@ def add_section_slide(prs, slide_data, style):
     return slide
 
 
-def add_content_slide(prs, slide_data, style):
+def add_content_slide(prs, slide_data, style, image_dir="images"):
     slide = prs.slides.add_slide(prs.slide_layouts[1])
     slide.shapes.title.text = slide_data["title"]
     set_font(slide.shapes.title.text_frame.paragraphs[0], style, path="content.title_text")
@@ -48,7 +50,11 @@ def add_content_slide(prs, slide_data, style):
 
         keyword = extract_illustration_keyword(bullet)
         if keyword:
-            insert_placeholder_box(slide, keyword)
+            image_path = find_matching_image(keyword, image_dir)
+            if image_path:
+                insert_image(slide, image_path)
+            else:
+                insert_placeholder_box(slide, keyword)
 
     return slide
 
