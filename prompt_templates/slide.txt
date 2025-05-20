@@ -5,6 +5,9 @@
 - 每页对象包含一个 "type"，可为 "title", "section", "content", "closing"；
 - title 页需要 "title" 和 "subtitle"；
 - content 页需要 "title" 和 bullets（为字符串数组）；
+- section 页需要 "title", 可以有"subtitle"；
+- closing 页需要 "title" 和 "subtitle"；
+- bullets 是一个字符串数组，内容为段落文本, 只在content中出现；
 - 插图建议请用 bullet 项以 "【插图】" 开头；
 - 返回 JSON，无需解释。
 

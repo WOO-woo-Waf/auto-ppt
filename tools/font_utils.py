@@ -23,7 +23,7 @@ def dynamic_font_size(text, base_size, max_length=25, min_size=16):
     return Pt(max(min_size, int(base_size * scale)))
 
 
-def set_font(paragraph, style_config, path="content.bullet_text", alignment=None):
+def set_font(paragraph, style_config, path="content.bullet_text", alignment=None, is_title=False):
     """
     设置段落字体样式，包含动态字号计算、颜色、粗体等。
 
@@ -46,11 +46,15 @@ def set_font(paragraph, style_config, path="content.bullet_text", alignment=None
         else:
             paragraph.alignment = PP_ALIGN.LEFT
 
-    # 动态字体大小逻辑
-    base_size = style.get("font_size", 24)
-    max_len = style.get("max_char", 25)  # 可选配置
-    min_size = style.get("min_font_size", 16)
-    r.font.size = dynamic_font_size(r.text, base_size, max_len, min_size)
+    if is_title:
+        # 动态字体大小逻辑
+        base_size = style.get("font_size", 24)
+        max_len = style.get("max_char", 25)  # 可选配置
+        min_size = style.get("min_font_size", 16)
+        r.font.size = dynamic_font_size(r.text, base_size, max_len, min_size)
+    else:
+        # 设置默认字体大小
+        r.font.size = Pt(style.get("font_size", 18))
 
     # 样式设置
     r.font.bold = style.get("bold", False)

@@ -17,7 +17,7 @@ def load_json(path):
         return json.load(f)
 
 
-template_file = "slides/夜游宫.json"
+template_file = "slides/aicode.json"
 style_file = "styles/style1.json"
 
 template_name = os.path.splitext(os.path.basename(template_file))[0]
