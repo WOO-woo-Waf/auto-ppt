@@ -1,12 +1,6 @@
 import os
-import re
 from difflib import get_close_matches
 from pptx.util import Inches
-
-
-def extract_illustration_keyword(text):
-    match = re.search(r"【插图】(.*)", text)
-    return match.group(1).strip() if match else None
 
 
 def find_matching_image(keyword, folder="images"):

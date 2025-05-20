@@ -1,11 +1,5 @@
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
-import re
-
-
-def extract_illustration_keyword(text):
-    match = re.search(r"【插图】(.*)", text)
-    return match.group(1).strip() if match else None
 
 
 def insert_placeholder_box(slide, keyword):
