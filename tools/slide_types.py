@@ -12,7 +12,7 @@ def add_title_slide(prs, slide_data, style):
     subtitle = slide.placeholders[1]
     subtitle.text = slide_data.get("subtitle", "")
     set_font(slide.shapes.title.text_frame.paragraphs[0], style, path="title.title_text")
-    set_font(subtitle.text_frame.paragraphs[0], style, path="title.subtitle_text")
+    set_font(subtitle.text_frame.paragraphs[0], style, path="title.subtitle_text", is_title=True)
     return slide
 
 
