@@ -30,7 +30,7 @@ auto-ppt/
 ### 1. 安装依赖
 
 ```
-pip install python-pptx
+pip install -r requirements.txt
 ```
 
 ### 2. 准备内容文件和样式模板
@@ -54,7 +54,8 @@ pip install python-pptx
       "title": "技术原理",
       "bullets": [
         "系统设计思路",
-        "【插图】整体架构图"
+        "【插图】整体架构图"  
+        // 以【插图】开头的内容会在图片目录中匹配并插入对应图片
       ]
     },
     {
@@ -97,11 +98,16 @@ pip install python-pptx
 
 ### 3. 运行程序
 
-程序将自动生成如下输出路径：
+使用命令行参数指定模板、样式、输出目录以及图片目录，例如：
 
+```bash
+python main.py --template slides/example.json \
+               --style styles/style1.json \
+               --output_dir output \
+               --image_dir images
 ```
-output/项目介绍_tech_dark.pptx
-```
+
+生成的文件将保存在 `output` 目录下，文件名由模板和样式名称组合而成。
 
 ---
 
